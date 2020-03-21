@@ -83,27 +83,27 @@ def start(quote_info, price1, price2, BInumber, species, library_type, rRNAremov
         f = q.var_quoteinfo
         f_name = str(q.var_quoteinfo + ".docx")
         Time = time.strftime('%Y-%m', time.localtime())
-        path_time = str('D:/sharepoint/OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
-        path = str('D:/sharepoint/OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
+        path_time = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
+        path = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
         if q.quote_temp.lower() in (s.lower() for s in PRICE_DICT.keys()):
             try:
                 os.mkdir(path_time)
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Novogene\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
                                 path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Novogene\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
                                 path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
             except FileExistsError:
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Novogene\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
                                 path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Novogene\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
                                 path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
     else:
         pass

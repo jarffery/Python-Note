@@ -79,6 +79,10 @@ SALES_DICT = {
     "Shuen Sun": ["Shuen Sun", "shuen.sun@novogeneusa.com"],
     "Diego Levi": ["Diego Levi", "Diego.Levi@novogeneusa.com"],
     "Emily Abbasi":["Emily Abbasi", "emily.abbasi@novogeneusa.com"],
+    "Katelen Gassman":["Katelen Gassman", "Katelen.Gassman@novogeneusa.com"],
+    "Andrew Bolt":["Andrew Bolt", "Andrew.bolt@novogeneusa.com"],
+    "Jey Sabith Ebron": ["Jey Sabith Ebron", "jey.ebron@novogeneusa.com"],
+    "Maggie Tobin": ["Maggie Tobin", "maggie.tobin@novogeneusa.com"],
 }
 
 PRICE_DICT = {
@@ -94,7 +98,7 @@ PRICE_DICT = {
     # [QC, HiSeq X Ten per lane, NovaSeq S4(<=3), NovaSeq S4( lane is 4, 5), NovaSeq S4(lane is 6, 7), NovaSeq S4(>=8), NovaSeq S2 per lane]
     "Premade-HiSeq": [15, 1300],
     # [QC, NovaSeq S4(<=3), NovaSeq S4( lane is 4, 5), NovaSeq S4(lane is 6, 7), NovaSeq S4(>=8)]
-    "Premade-NovaS4": [15, 5949, 5749, 5749, 5599],
+    "Premade-NovaS4": [15, 5949, 5799, 5799, 5599],
     #[QC, lane price PE250, flowcell PE250, lane price PE50/SE50, flowcell PE50/SE50]
     "Premade-NovaSP": [15, 7500, 13500, 2900, 5500],
     # [6G package, 12G package, libprep, seq per G, standard BI, mapping, >24G seq base price, 6G FFPE, 12G FFPE, FFPE lib prep, FFPE reseq]
@@ -110,5 +114,10 @@ PRICE_DICT = {
     "Amplicon": [15, 8, 85, 40, 55, 70], #[QC, libprep, seq per M reads, 30K raw reads, 50K raw reads, 100K raw reads]
     "Metagenomics": [199, 299, 100, 45, 16.5, 179], #[6G package, 12G package, library preparation, analysis, seq per G, promotionprice48samples]
     "MicrobialWGS": [100, 18, 50], # [libprep, seq per G, standard BI]
-    "WGBS": [300, 20, 8], #[libprep, seq per G, strandard BI per G]
+    "WGBS": [300, 20, 8], #[libprep, seq per G, standard BI per G]
+    "chipseq": [120, 20, 200], #[libprep, seq per G, standard BI w/o data amount limit]
+    "ripseq": [120, 20, 200], #[libprep, seq per G, standard BI w/o data amount limit]
+    "RRBS": [300, 20, 200], #[libprep, seq per G, standard BI w/o data amount limit]
+    "10X": [800, 14, 6], #[libprep, seq per G, standard BI per G]
+    "nanopore": [550, 60, 450, 15], #[libprep, seq per G, standard BI if =< 30G, standard BI per G if > 30G]
 }

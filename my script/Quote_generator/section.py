@@ -116,7 +116,7 @@ class quote(object):
         else:
             return 5.8
     def get_species(self):  # check the species
-        if not (list(filter(lambda x: x in self.quote_temp.lower(), ['premade','Metagenomics','amplicon']))):
+        if not (list(filter(lambda x: x in self.quote_temp.lower(), ['premade','metagenomics','amplicon']))):
             if 'human' in self.var_quoteinfo:
                 self.species = 'Homo sapiens'
             elif 'mouse' in self.var_quoteinfo:
@@ -180,6 +180,22 @@ class quote(object):
             self.microbialWGS_PacBio()
         elif self.quote_temp.lower() == 'wgbs':
             self.WGBS()
+        elif self.quote_temp.lower() == 'chipseq':
+            self.chipseq()
+        elif self.quote_temp.lower() == 'ripseq':
+            self.ripseq()
+        elif self.quote_temp.lower() == 'rrbs':
+            self.RRBS()
+        elif self.quote_temp.lower() == '10x':
+            self.tenX()
+        elif self.quote_temp.lower() == 'hic':
+            self.hic()
+        elif self.quote_temp.lower() == 'microbialdenovo':
+            self.microbialDenovo()
+        elif self.quote_temp.lower() == 'wts':
+            self.wts()
+        elif filter(lambda x: x in self.quote_temp.lower(), ["pawgs-ont", "denovo-ont"]):
+            self.ONT()
         elif list(filter(lambda x: x in self.quote_temp.lower(), ["isoseq", "pacbio"])):
             self.pacbio()
         else:
@@ -723,11 +739,6 @@ class quote(object):
         self.service_name = "Amplicon (lib prep & seq)"
         self.filename_quotationterms = os.path.join(
             "./support-section", "QuotationTerms.docx")
-        self.filename_price = os.path.join(
-            pwd, "Part1 Pricing", "Pricing_amplicon.docx")
-        self.filename_requirement = os.path.join(
-            pwd, "Part2 SampleRequirements", "amplicon_requirement.docx"
-        )
         #ADH check
         self.ADH_check()
         #price and WBI later.......
@@ -742,6 +753,12 @@ class quote(object):
                 pwd_BI, "original_amplicon.docx")
         #check WOBI
         self.WOBI_check()
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "Pricing_amplicon.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "amplicon_requirement.docx"
+        )
+
     def circRNA(self):
         self.var_groupemail = 'us.rna@novogeneusa.com'
         self.service_name = "CircRNA"
@@ -791,6 +808,67 @@ class quote(object):
             self.var_UP_2 = self.var_UP_2
         # ADH check
         self.ADH_check()
+    def chipseq(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = 'ChIP-seq'
+        pwd = "./support-section/DNAproducts"
+        pwd_BI = "./support-section/DNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "ChIP-Seq_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "ChIP-Seq_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "DNA_TechnicalTerms.docx")
+        self.ADH_check()
+        self.var_UP_1 = math.ceil(
+            PRICE_DICT["chipseq"][0] + self.data_output * PRICE_DICT["chipseq"][1])
+        if 'WBI' in self.var_quoteinfo:
+            #self.process_dict["chipseq"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "ChIP-Seq_standard.docx")
+            self.var_UP_2 = math.ceil(
+                PRICE_DICT["chipseq"][2])  # no data amount limitation
+        else:
+            #self.process_dict["chipseq"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "ChIP-Seq_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+
+    def ripseq(self):
+        self.var_groupemail = 'us.rna@novogeneusa.com'
+        self.service_name = 'RIP-seq'
+        pwd = "./support-section/RNAproducts"
+        pwd_BI = "./support-section/RNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "RIP-Seq_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "RIP-Seq_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "RIP-Seq_TechnicalTerms.docx")
+        self.ADH_check()
+        self.var_UP_1 = math.ceil(
+            PRICE_DICT["ripseq"][0] + self.data_output * PRICE_DICT["ripseq"][1])
+        if 'WBI' in self.var_quoteinfo:
+            # self.process_dict["ripseq"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "RIP-Seq_standard.docx")
+            self.var_UP_2 = math.ceil(
+                PRICE_DICT["ripseq"][2])  # no data amount limitation
+        else:
+            # self.process_dict["ripseq"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "RIP-Seq_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
     def PCRproduct(self):
         self.var_groupemail = 'us.dna@novogeneusa.com'
         self.service_name = "PCRproduct"
@@ -809,6 +887,17 @@ class quote(object):
             "./support-section", "QuotationTerms.docx")
         self.filename_price = os.path.join(
             pwd, "MicrobialWGSPacBio.docx")
+        # ADH check
+        self.ADH_check()
+
+    def microbialDenovo(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = "Microbial Denovo"
+        pwd = "./support-section/microbial"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "MicrobialDenovo.docx")
         # ADH check
         self.ADH_check()
     def pacbio(self):
@@ -848,6 +937,157 @@ class quote(object):
                     "./support-section", "WOBI_Novogene.docx")
         else:
             pass
+    def RRBS(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = 'RRBS'
+        pwd = "./support-section/DNAproducts"
+        pwd_BI = "./support-section/DNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "RRBS_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "RRBS_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "DNA_TechnicalTerms.docx")
+        self.ADH_check()
+        self.var_UP_1 = math.ceil(
+            PRICE_DICT["RRBS"][0] + self.data_output * PRICE_DICT["RRBS"][1])
+        if 'WBI' in self.var_quoteinfo:
+            # self.process_dict["RRBS"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "RRBS_standard.docx")
+            self.var_UP_2 = math.ceil(
+                PRICE_DICT["RRBS"][2])  # no data amount limitation
+        else:
+            # self.process_dict["RRBS"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "RRBS_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+    def tenX(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = '10X WGS'
+        pwd = "./support-section/DNAproducts"
+        pwd_BI = "./support-section/DNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "10X_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "10X_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "DNA_TechnicalTerms.docx")
+        self.ADH_check()
+        self.var_UP_1 = math.ceil(
+            PRICE_DICT["10X"][0] + self.data_output * PRICE_DICT["10X"][1])
+        if 'WBI' in self.var_quoteinfo:
+            # self.process_dict["10X"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "10X_standard.docx")
+            self.var_UP_2 = math.ceil(
+                self.data_output * PRICE_DICT["10X"][2])
+        else:
+            # self.process_dict["10X"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "10X_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+
+    def ONT(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = 'Oxford Nanopore Technologies'
+        pwd = "./support-section/DNAproducts"
+        pwd_BI = "./support-section/DNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "ONT_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "ONT_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "DNA_TechnicalTerms.docx")
+        self.ADH_check()
+        """self.var_UP_1 = math.ceil(
+            PRICE_DICT["nanopore"][0] + self.data_output * PRICE_DICT["nanopore"][1])"""
+        if "denovo" in self.var_quoteinfo:
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "ONT_denovo.docx")
+        elif 'WBI' in self.var_quoteinfo:
+            # self.process_dict["nanopore"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "ONT_standard.docx")
+            """self.var_UP_2 = math.ceil(
+                self.data_output * PRICE_DICT["nanopore"][2])"""
+        else:
+            # self.process_dict["nanopore"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "ONT_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+
+    def hic(self):
+        self.var_groupemail = 'us.dna@novogeneusa.com'
+        self.service_name = 'hic'
+        pwd = "./support-section/DNAproducts"
+        pwd_BI = "./support-section/DNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "HiC_pricing.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "HiC_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            pwd, "Part3 TechnicalTerms", "DNA_TechnicalTerms.docx")
+        self.ADH_check()
+        """self.var_UP_1 = math.ceil(
+            PRICE_DICT["HiC"][0] + self.data_output * PRICE_DICT["HiC"][1])"""
+        if "WOBI" in self.var_quoteinfo:
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "HiC_WOBI.docx")
+        else:
+            # self.process_dict["HiC"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "HiC_WOBI.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+
+    def wts(self):
+        self.var_groupemail = 'us.rna@novogeneusa.com'
+        self.service_name = 'Whole Transcriptomic RNASeq'
+        pwd = "./support-section/RNAproducts"
+        pwd_BI = "./support-section/RNAproducts/Part4 BIcontents"
+        self.filename_quotationterms = os.path.join(
+            "./support-section", "QuotationTerms.docx")
+        self.filename_price = os.path.join(
+            pwd, "Part1 Pricing", "pricing_wts.docx")
+        self.filename_requirement = os.path.join(
+            pwd, "Part2 SampleRequirements", "wts_requirement.docx"
+        )
+        self.filename_technicaltermsnotes = os.path.join(
+            "./support-section", "TechnicalTermsNotes.docx")
+        self.ADH_check()
+        """self.var_UP_1 = math.ceil(
+            PRICE_DICT["wts"][0] + self.data_output * PRICE_DICT["wts"][1])"""
+        if "ADV" in self.var_quoteinfo:
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "advanced_wts.docx")
+        else:
+            # self.process_dict["wts"][2][3] = "LAAnumberstillneeded"
+            self.filename_bicontents = os.path.join(
+                pwd_BI, "standard_wts.docx")
+            self.var_UP_2 = self.var_UP_2
+        # ADH check
+        self.ADH_check()
+
     def compose(self):
         pwd = GetDesktopPath()
         outpath = os.path.join(pwd, self.var_quoteinfo + '.docx')

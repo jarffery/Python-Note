@@ -81,7 +81,27 @@ class lead_submit(quote):
         #submit lead
         save_url = "http://cms.novogene.com/nhzy/projectquotation/quotation!insertQuotationInfo.action?cond.pageI18n="
         #US quote json_dict
-        submit_dict = {"quotationInfo":{"qtype":"1","salesname":self.var_quoteinfo,"currencynow":"USD","bcompany":"202","zonearea":"US","totalprice":"0","validity":"30","corpno":"","corpname":"","linkmantel":"","linkmanmail":"","corpdesc":"","corpcode":"","corpshippingaddress":""}}
+        submit_dict = {"quotationInfo": {
+            "qtype": "1",
+            "salesname": self.var_quoteinfo,
+            "currencynow": "USD",
+            "bcompany": "202",
+            "zonearea": "US",
+            "totalprice": "0",
+            "afteroffersum": "",
+            "taxcode": "CN VAT 0",
+            "tax": "CN_VAT",
+            "taxname": "中国增值税",
+            "taxcontent": "海外税率",
+            "validity": "30",
+            "corpno": "",
+            "corpname": "",
+            "linkmantel": "",
+            "linkmanmail": "",
+            "corpdesc": "",
+            "corpcode": "",
+            "corpshippingaddress": ""
+        }}
         for key, value in self.client_post.items():
             submit_dict["quotationInfo"].update({key:value})
         search = self.CMS_Session.post(save_url, headers = self.header, data = self.json_post(submit_dict))
