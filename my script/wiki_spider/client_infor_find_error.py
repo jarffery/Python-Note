@@ -23,7 +23,7 @@ for i in kept_columns:
 merge_final = pd.DataFrame()
 for key in missed_info:
     merge_final = pd.concat([merge_final,missed_info[key]])    
-merge_final[merge_final.index.duplicated(keep = 'first')]
+merge_final = merge_final[~merge_final.index.duplicated(keep = 'first')]
 
 #to csv
-merge_final.to_csv('./info_missed.csv', encoding="utf_8_sig")
+merge_final.to_csv('./info_missed_final.csv', encoding="utf_8_sig")
