@@ -32,6 +32,7 @@ class google_search(object):
         address = None
         state = None
         zip_code = None
+        phone = None
         try:
             place_id = text_search_result.json()["results"][0]["place_id"]
             address = text_search_result.json()["results"][0]["formatted_address"]
