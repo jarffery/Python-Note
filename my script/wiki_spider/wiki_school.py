@@ -23,12 +23,12 @@ def wiki_search(school_name):
     information = r.find("table", {"class": "infobox vcard"})
     return information
 
-def google_map_search(school_name):
+def google_map_search(school_name, API_key):
     global school_dict
     url_json = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="
     query = school_name
     query = query.replace(' ', '+')
-    my_key = '&key=AIzaSyCpMizkSRRC72cymY_75vIvXU88M9at_Fo'
+    my_key = '&key=' + API_key
     text_search = url_json + query + my_key
     text_search_result = requests.get(text_search)
     try:
@@ -53,7 +53,7 @@ def google_map_search(school_name):
 for i in school:
     print(i)
     try:
-        google_map_search(i)
+        google_map_search(i, "AIzaSyCpMizkSRRC72cymY_75vIvXU88M9at_Fo")
     except KeyError:
         noschool_list.append(i)
         pass 
