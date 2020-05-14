@@ -4,16 +4,17 @@ import json
 import re
 from bs4 import BeautifulSoup
 import pandas as pd
-# import googlemaps
 from datetime import datetime
+import csv
 
 
+file = pd.read_csv("client_info_2.csv")
 
-file = pd.read_csv("client_info.csv")
-
-pd_school = file.drop_duplicates(subset='Company name', keep="last")[
-    "Company name"]
-
+pd_school = file.drop_duplicates(subset='School', keep="last")[
+    "School"]
+school = pd_school[~pd_school.isnull()]
+school_dict = dict()
+noschool_list = list()
 def wiki_search(school_name):
     main_url = "https://en.wikipedia.org/wiki/"
     search_url = main_url + school_name
@@ -23,7 +24,7 @@ def wiki_search(school_name):
     return information
 
 def google_map_search(school_name):
-    school_dict = dict()
+    global school_dict
     url_json = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="
     query = school_name
     query = query.replace(' ', '+')
@@ -34,27 +35,29 @@ def google_map_search(school_name):
         place_id = text_search_result.json()["results"][0]["place_id"]
         address = text_search_result.json()["results"][0]["formatted_address"]
         zip_code = re.search('\d{5}(-\d{4})?', address).group(0)
-        school_dict.update(
-            {school_name:
-                {"place_id":place_id, 
-                "address":address,
-                "zip_code":zip_code,
-                }})
-    except (RuntimeError, TypeError, NameError, AttributeError):
+        state = re.search(' [A-Z][A-Z] ', address).group(0).strip()
+    except (KeyError, RuntimeError, TypeError, NameError, AttributeError, IndexError):
         pass
+    school_dict.update({school_name:{"place_id": place_id,"address": address,"zip_code": zip_code,"state": state,}})
     url_detail = "https://maps.googleapis.com/maps/api/place/details/json?"
     place_id_result = "place_id=" + school_dict[school_name]["place_id"]
     Field = "&fields=name,formatted_phone_number"
     detail_search = url_detail + place_id_result +Field + my_key
-    
     try:
         detail_search_result = requests.get(detail_search)
         phone = detail_search_result.json()["result"]["formatted_phone_number"]
-        school_dict[school_name].update({"phone": phone})
-    except (RuntimeError, TypeError, NameError):
+    except (KeyError, RuntimeError, TypeError, NameError, IndexError, AttributeError):
         pass
-    
-    return text_search_result, detail_search_result, school_dict
+    school_dict[school_name].update({"phone": phone})
 
+for i in school:
+    print(i)
+    try:
+        google_map_search(i)
+    except KeyError:
+        noschool_list.append(i)
+        pass 
 
-x, y, z = google_map_search("Tuskegee University")
+#write to csv
+school_dataframe = pd.DataFrame.from_dict(school_dict, orient='index', dtype=None, columns=None)
+school_dataframe.to_csv("./school_info.csv")
