@@ -27,11 +27,16 @@ class google_search(object):
         my_key = '&key=' + self.API_key
         text_search = url_json + query + my_key
         text_search_result = requests.get(text_search)
+        #assign the blank value
+        place_id = None
+        address = None
+        state = None
+        zip_code = None
         try:
             place_id = text_search_result.json()["results"][0]["place_id"]
             address = text_search_result.json()["results"][0]["formatted_address"]
-            zip_code = re.search('\d{5}(-\d{4})?', address).group(0)
             state = re.search(' [A-Z][A-Z] ', address).group(0).strip()
+            zip_code = re.search('\d{5}(-\d{4})?', address).group(0)
         except (KeyError, RuntimeError, TypeError, NameError, AttributeError, IndexError):
             pass
         self.school_dict.update({school_name:{"place_id": place_id,"address": address,"zip_code": zip_code,"state": state,}})
