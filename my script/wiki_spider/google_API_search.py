@@ -55,11 +55,11 @@ class google_search(object):
 
 if __name__ == "__main__":
     # main_script
-    # file_name = input("Please input your file name and path (./example.csv): ")
-    # column_name = input("Please input the Column name that you want to process: ")
-    # Google_API = input("Please input your google map API: ")
-    # search = google_search(file_name, column_name, Google_API)
-    search = google_search('client_info_2.csv', 'School', 'AIzaSyCpMizkSRRC72cymY_75vIvXU88M9at_Fo')
+    file_name = input("Please input your file name and path (./example.csv): ")
+    column_name = input("Please input the Column name that you want to process: ")
+    Google_API = input("Please input your google map API: ")
+    search = google_search(file_name, column_name, Google_API)
+    # search = google_search('client_info_2.csv', 'School', 'AIzaSyCpMizkSRRC72cymY_75vIvXU88M9at_Fo')
     search.read_csv()
     for i in search.school:
         print(i)
