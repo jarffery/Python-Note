@@ -65,11 +65,9 @@ if __name__ == "__main__":
         try:
             search.google_map_search(i)
         except KeyError:
-            search.noschool_list.append(i)
             pass 
 
     #write to csv
     school_dataframe = pd.DataFrame.from_dict(search.school_dict, orient='index', dtype=None, columns=None)
-    noschool_dataframe = pd.DataFrame({'school_not_found': search.noschool_list})
-    school_dataframe.to_csv("./school_info.csv")
-    noschool_dataframe.to_csv("./noschool_info.csv")
+    school_dataframe.to_csv("./school_info.csv", encoding="utf_8_sig")
+
