@@ -28,11 +28,11 @@ class google_search(object):
         text_search = url_json + query + my_key
         text_search_result = requests.get(text_search)
         #assign the blank value
-        place_id = None
-        address = None
-        state = None
-        zip_code = None
-        phone = None
+        place_id = str()
+        address = str()
+        state = str()
+        zip_code = str()
+        phone = str()
         try:
             place_id = text_search_result.json()["results"][0]["place_id"]
             address = text_search_result.json()["results"][0]["formatted_address"]
