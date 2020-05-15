@@ -27,3 +27,15 @@ merge_final = merge_final[~merge_final.index.duplicated(keep = 'first')]
 
 #to csv
 merge_final.to_csv('./info_missed_final.csv', encoding="utf_8_sig")
+
+
+# file = pd.read_csv("client_info_latest.csv")
+# file_2 = pd.read_csv("info_missed_editing.csv", index_col=1)
+
+# file_2_fixed = file_2[~file_2.index.duplicated(keep='first')]
+
+# for i in file_2.index:
+#     print(i)
+#     file.loc[i] = file_2_fixed.loc[i]
+
+# file.to_csv("./merged_final.csv", encoding="utf_8_sig")
