@@ -18,28 +18,34 @@ merge_final = merge_final[~merge_final.index.duplicated(keep = 'first')]
 merge_final.to_csv('./info_missed_final_2nd.csv', encoding="utf_8_sig")
 
 
+file_2 = pd.read_csv("client_info_2.csv", encoding="utf_8_sig")
+search_school_id = file_2[~file_2.loc[:,"School"].isnull()].loc[:, "School"]
 
-file_2 = pd.read_csv("info_missed_final_2nd.csv")
-search_school_id = file_2[~file_2.loc[: ,"school_ID"].isnull()].loc[: ,"school_ID"]
+file_3 = pd.read_csv("school_info.csv", encoding="utf_8_sig")
+school_id = file_3.loc[:,"School"]
 
-file_3 = pd.read_csv("merged_final.csv", index_col=0)
-school_id = file_3[~file_3.loc[:,"Company number"].duplicated(keep='first')]
+State_index = file_2[file_2["State"].isnull()].index
+phone_index = file_2[file_2["Telephone"].isnull()].index
+Postcode_index = file_2[file_2["Postcode"].isnull()].index
 
-for i in search_school_id.index:
-    State = file_3[file_3['Company number'] == search_school_id[i]]["State"].dropna().reset_index(drop = True)
-    phone = file_3[file_3['Company number'] == search_school_id[i]]["Telephone"].dropna().reset_index(drop = True)
-    Postcode = file_3[file_3['Company number'] == search_school_id[i]]["Postcode"].dropna().reset_index(drop = True)
-    if State.empty:
-        pass
-    else:
-        file_2["State"][i] = State[0]
-    if phone.empty:
-        pass
-    else:
-        file_2["Telephone"][i] = phone[0]
-    if Postcode.empty:
-        pass
-    else:
-        file_2["Postcode"][i] = Postcode[0]
-        
+def replce_info(pd_index, pd_file, column_name):
+    global search_school_id
+    global file_2
+    for i in pd_index:
+        print(i)  
+        try:
+            replace = pd_file[pd_file['School'] == search_school_id[i]][column_name].dropna().reset_index(drop = True)
+        except KeyError:
+            next
+        if replace.empty:
+            pass
+        else:
+            file_2.loc[i,column_name] = replace[0]
+
+
+
+replce_info(State_index, file_3, "State")
+replce_info(phone_index, file_3, "Telephone")
+replce_info(Postcode_index, file_3, "Postcode")
+
 file_2.to_csv("./merged_final2.csv", encoding="utf_8_sig")
