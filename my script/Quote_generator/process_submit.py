@@ -28,7 +28,7 @@ class database(object):
         try:
             postData = {
                 "loginInfo.usercode": "jerry.jie",
-                "loginInfo.userpass": "1",
+                "loginInfo.userpass": "0128Xx@gina",
                 "loginInfo.islocal": "1",
             }
             self.responseRes = self.CMS_Session.post(
