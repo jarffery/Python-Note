@@ -150,6 +150,6 @@ class database(object):
 
 if __name__ == "__main__":
     new_process = database()
-    new_process.login_user('jerry.jie', '0128Xx@gina')
+    new_process.login()
     new_process.update_producttype()
     new_process.country_dict_generator()
