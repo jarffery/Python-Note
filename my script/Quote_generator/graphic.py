@@ -7,8 +7,6 @@ Created on Wed Dec 19 22:05:40 2018
 happy every day!!
 """
 import platform
-import os
-import re
 import tkinter.filedialog
 import tkinter as tk
 from Quotesection import start

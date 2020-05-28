@@ -83,29 +83,31 @@ class SIF(database):
             print("no email updated")
 
     def SIF_info_submit(self, quote: str):
-        #check if this is a premade project
+        # check if this is a premade project
         self.quote_name = quote
         self.contract_search(quote)
         self.information_update()
         producttype_url = 'http://cms.novogene.com/nhzy/projectquotation/quotationproduct!selectQuotationproductInfosByCond.action'
         producttype_post = {
-            "cond.kfquotationid" : self.quotationid
+            "cond.kfquotationid": self.quotationid
         }
-        producttype_search = self.CMS_Session.post(producttype_url, headers= self.header, data = producttype_post)
+        producttype_search = self.CMS_Session.post(producttype_url, headers=self.header, data=producttype_post)
         try:
             self.producttype_search_text = json.loads(producttype_search.text)
             self.pcode = self.producttype_search_text['quotationproductInfos'][0]['pcode']
         except KeyError:
             raise KeyError(f'cant find the pcode, used SIF_info_submit module!')
-        #submit the file to batch ID
+        # submit the file to batch ID
         SIF_batchID_url = 'http://cms.novogene.com/nhzy/subproject/kfappointment!insertKfappointmentInfo.action'
         # SIF_batchID_search_url = "http://cms.novogene.com/nhzy/subproject/kfappointment!selectKfappointmentInfoById.action"
-        #check if contract is library (different is the businesstype, library: 13, nonlibrary:12)
-        if self.pcode == 'AA0032':
+        # check if contract is library (different is the businesstype, library: 13, nonlibrary:12)
+        library_code = ['AA0032', 'RSSQ00601', 'RSSQ01001', 'RSSQ00501', 'RSSQ01101', 'RSSQ00801', 'RSSQ00901',
+                        'RSSQ00701' 'RSSQ01201']
+        if list(filter(lambda x: x in library_code, [self.pcode])):
             self.update_SIF_json = process_SIF_dict_library
         else:
             self.update_SIF_json = process_SIF_dict
-        #update the necessary info
+        # update the necessary info
         self.update_SIF_json['kfappointmentInfo'].update(self.update_dict)
         post = self.json_post(self.update_SIF_json)
         # post.update({"businesstype":12,"islocal":0,})
@@ -154,7 +156,6 @@ class SIF(database):
         statusCode = self.file_response.status_code
         print(f"statusCode = {statusCode}")
 
-
     def sample_check(self):
         from SIF_CMS_json import sample_update_dict
         '''under testing'''
@@ -164,10 +165,10 @@ class SIF(database):
         data_type_url = 'http://cms.novogene.com/nhzy/subproject/subprojectquoprocess!selectSubprojectquoprocessInfosByProcessname.action'
         sample_info_update_url = 'http://cms.novogene.com/nhzy/subproject/kfsampleinfo!checkKfsampleinfoInfo.action'
         batch_id = {
-            "limit" : 10000,
+            "limit": 10000,
             "cond.batchid": self.batchid,
             "page": 1,
-            "start" : 0,
+            "start": 0,
         }
         # check samples info
         self.sample_response = self.CMS_Session.post(sample_url, headers=self.header, data=batch_id)
@@ -194,26 +195,28 @@ class SIF(database):
             "desc10": self.sample_product_type1['subprojectInfos'][0]['pname'],
             "desc4": self.pcode,
             "desc16": self.sample_product_type2['vmaps'][0]['processtypecode'],
-            "librariytype": self.sample_product_type2['vmaps'][0]['processtype'],#library 还拼错了居然:(
+            "librariytype": self.sample_product_type2['vmaps'][0]['processtype'],  # library 还拼错了居然:(
             "datas": self.sample_data["infos"][0]["datasize"],
             "dataunit": self.sample_data["infos"][0]["dataunit"],
             "teststrategy": "PE150",
             # "samplestatus": "Dissolved in ddH2O",
             # "sampletype":"total RNA",
             # "speciestype" : "animal",
-            "subprojectdesc" :self.update_dict['projectname'],
-            "subprojectnum" :str(self.update_dict['projectnum'])+"-Z01",
+            "subprojectdesc": self.update_dict['projectname'],
+            "subprojectnum": str(self.update_dict['projectnum']) + "-Z01",
         }
         self.sample_submit_dict = list()
         for i in range(len(self.sample_list)):
             self.sample_list[i].update(self.sample_dict)
-            self.sample_submit_dict.append({key:self.sample_list[i][key] for key in (sample_update_dict["kfsampleinfoInfos"][0].keys() & self.sample_list[i].keys())})
+            self.sample_submit_dict.append({key: self.sample_list[i][key] for key in (
+                    sample_update_dict["kfsampleinfoInfos"][0].keys() & self.sample_list[i].keys())})
         post_sampleinfo = self.json_post({"kfsampleinfoInfos": self.sample_submit_dict})
-        self.search_sampleinfo = self.CMS_Session.post(sample_info_update_url, headers=self.header, data=post_sampleinfo)
+        self.search_sampleinfo = self.CMS_Session.post(sample_info_update_url, headers=self.header,
+                                                       data=post_sampleinfo)
 
-
-# path = 'C:/Users/Jerry/OneDrive - Novogene/Project/eukmrnaseq/2019-11/Davis-US-Miamioh-32-plant-EukmRNAseq-WOBI-30M-NVUS2019110651.docx/hsybznzzexcel.xlsx'
-# quote = 'NVUS2019110651'
+#test use
+# path = 'C:/Users/jerry/onedrive-work/OneDrive - Novogene/Project/premade-hiseq/2020-05/Davis-US-CCHMC-1-premade-1-lane-WOBI-NVUS2020051818/NovoLibrarySIF-NVUS2020051818-filled.xlsx'
+# quote = 'NVUS2020051818'
 # test = SIF()
 # test.login()
 # test.SIF_info_submit(quote)

@@ -624,7 +624,7 @@ class quote(object):
         self.filename_technicaltermsnotes = os.path.join(
             "./support-section", "TechnicalTermsNotes.docx")
         self.filename_requirement = os.path.join(
-            pwd, "Part2 SampleRequirements", "microbial_bacteria_requirement.docx")
+            pwd, "Part2 SampleRequirements", "microbial_WGS_requirement.docx")
         self.var_UP_1 = math.ceil(
             PRICE_DICT["MicrobialWGS"][0] + self.data_output * PRICE_DICT["MicrobialWGS"][1])
         #ADH check

@@ -83,39 +83,68 @@ def start(quote_info, price1, price2, BInumber, species, library_type, rRNAremov
         f = q.var_quoteinfo
         f_name = str(q.var_quoteinfo + ".docx")
         Time = time.strftime('%Y-%m', time.localtime())
-        path_time = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
-        path = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
+        path_time = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
+        path = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
         if q.quote_temp.lower() in (s.lower() for s in PRICE_DICT.keys()):
             try:
                 os.mkdir(path_time)
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
-                                path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                                path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
-                                path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                                path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
             except FileExistsError:
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-library.xlsx',
-                                path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                                path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Quote_generator\\support-section\\OMS-SIF-DNA&RNA.xlsx',
-                                path + '\\' + 'Sample_Information_Form-' + q.searchObj[1] + '.xlsx')
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                                path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
     else:
         pass
-# for self usage PTO
-    #if 'jerry' in info_dict.get('VAR_TS').lower():
-    #    path = "./support-section/Jerry_PTO.csv"
-    #    value = [q.searchObj[0], q.quote_number, q.firstname, q.lastname, q.var_school, q.var_client_email, q.var_quoteinfo, q.searchObj[7], q.searchObj[8], q.searchObj[9], q.searchObj[10], q.searchObj[11], q.searchObj[12], q.searchObj[13], q.searchObj[14], q.searchObj[15], q.searchObj[16], q.searchObj[17], q.searchObj[18]]
-    #    try:
-    #        with open(path, 'a', newline = '') as csvfile:
-    #            writer = csv.writer(csvfile)
-    #            writer.writerow(value)
-    #        csvfile.close()
-    #        print("record added")
-    #    except:
-    #        print("record didn't added")
+
+def start_folder(quote_info, price1, price2, BInumber, species, library_type, rRNAremoval_check):
+    q = quote(quote_info, price1, price2, BInumber, species, library_type, rRNAremoval_check)
+    sam_num_1, sam_num_2 = q.get_sam_num()
+    compose_name, var_UP_1, var_UP_2, data_output, var_library_type, var_platform = q.service_type()
+    q.people_check()
+    pwd = GetDesktopPath()
+    outpath = os.path.join(pwd, q.var_quoteinfo + 'pdf')
+    if os.path.exists(outpath):
+        os.unlink(outpath)
+    f = q.var_quoteinfo
+    f_name = str(q.var_quoteinfo + ".pdf")
+    Time = time.strftime('%Y-%m', time.localtime())
+    path_time = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
+    path = str(
+        'C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(
+            f))
+    if q.quote_temp.lower() in (s.lower() for s in PRICE_DICT.keys()):
+        try:
+            os.mkdir(path_time)
+            os.mkdir(path)
+            shutil.copy(outpath, path + '\\' + f_name)
+            if "premade" in q.quote_temp.lower():
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
+            else:
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
+        except FileExistsError:
+            os.mkdir(path)
+            shutil.copy(outpath, path + '\\' + f_name)
+            if "premade" in q.quote_temp.lower():
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
+            else:
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
