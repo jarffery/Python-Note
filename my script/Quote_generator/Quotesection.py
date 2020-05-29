@@ -114,9 +114,9 @@ def start_folder(quote_info, price1, price2, BInumber, species, library_type, rR
     compose_name, var_UP_1, var_UP_2, data_output, var_library_type, var_platform = q.service_type()
     q.people_check()
     pwd = GetDesktopPath()
-    outpath = os.path.join(pwd, q.var_quoteinfo + 'pdf')
-    if os.path.exists(outpath):
-        os.unlink(outpath)
+    outpath = os.path.join(pwd, q.var_quoteinfo + '.pdf')
+    # if os.path.exists(outpath):
+    #     os.unlink(outpath)
     f = q.var_quoteinfo
     f_name = str(q.var_quoteinfo + ".pdf")
     Time = time.strftime('%Y-%m', time.localtime())
