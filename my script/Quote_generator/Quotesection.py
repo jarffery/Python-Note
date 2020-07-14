@@ -83,27 +83,27 @@ def start(quote_info, price1, price2, BInumber, species, library_type, rRNAremov
         f = q.var_quoteinfo
         f_name = str(q.var_quoteinfo + ".docx")
         Time = time.strftime('%Y-%m', time.localtime())
-        path_time = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
-        path = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
+        path_time = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
+        path = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(f))
         if q.quote_temp.lower() in (s.lower() for s in PRICE_DICT.keys()):
             try:
                 os.mkdir(path_time)
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
                                 path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
                                 path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
             except FileExistsError:
                 os.mkdir(path)
                 shutil.copy(outpath, path + '\\' + f_name)
                 if "premade" in q.quote_temp.lower():
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
                                 path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
                 else:
-                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    shutil.copy('C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
                                 path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
     else:
         pass
@@ -120,9 +120,9 @@ def start_folder(quote_info, price1, price2, BInumber, species, library_type, rR
     f = q.var_quoteinfo
     f_name = str(q.var_quoteinfo + ".pdf")
     Time = time.strftime('%Y-%m', time.localtime())
-    path_time = str('C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
+    path_time = str('C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time)
     path = str(
-        'C:\\Users\\Jerry\\onedrive-work\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(
+        'C:\\Users\\Jerry\\OneDrive - Novogene/Project/' + q.quote_temp.lower() + '\\' + Time + '\\' + str(
             f))
     if q.quote_temp.lower() in (s.lower() for s in PRICE_DICT.keys()):
         try:
@@ -131,20 +131,20 @@ def start_folder(quote_info, price1, price2, BInumber, species, library_type, rR
             shutil.copy(outpath, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
                     path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
             else:
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
                     path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
         except FileExistsError:
             os.mkdir(path)
             shutil.copy(outpath, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
                     path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
             else:
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Python-Note\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
+                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
                     path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
