@@ -109,12 +109,15 @@ def start(quote_info, price1, price2, BInumber, species, library_type, rRNAremov
         pass
 
 def start_folder(quote_info, price1, price2, BInumber, species, library_type, rRNAremoval_check):
+    # quote was downloaded in Download folder
+    quote_path = 'C:\\Users\\Jerry\\Downloads\\PrintPDF'
     q = quote(quote_info, price1, price2, BInumber, species, library_type, rRNAremoval_check)
     sam_num_1, sam_num_2 = q.get_sam_num()
     compose_name, var_UP_1, var_UP_2, data_output, var_library_type, var_platform = q.service_type()
     q.people_check()
     pwd = GetDesktopPath()
     outpath = os.path.join(pwd, q.var_quoteinfo + '.pdf')
+
     # if os.path.exists(outpath):
     #     os.unlink(outpath)
     f = q.var_quoteinfo
@@ -128,7 +131,7 @@ def start_folder(quote_info, price1, price2, BInumber, species, library_type, rR
         try:
             os.mkdir(path_time)
             os.mkdir(path)
-            shutil.copy(outpath, path + '\\' + f_name)
+            shutil.move(quote_path, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
                     'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
@@ -139,7 +142,7 @@ def start_folder(quote_info, price1, price2, BInumber, species, library_type, rR
                     path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
         except FileExistsError:
             os.mkdir(path)
-            shutil.copy(outpath, path + '\\' + f_name)
+            shutil.move(quote_path, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
                     'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
