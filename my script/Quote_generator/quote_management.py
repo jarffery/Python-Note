@@ -292,7 +292,7 @@ class Application(tk.Frame):
 def main():
     root = tk.Tk()
     root.title('TSgo')
-    root.iconbitmap('./icon/biology.ico')
+    root.iconbitmap('./Documents/GitHub/Note-Python/my script/Quote_generator/icon/biology.ico')
     app = Application(master=root)
     app.mainloop()
 
