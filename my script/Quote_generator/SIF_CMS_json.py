@@ -56,6 +56,7 @@ process_SIF_dict = {
         "remark": "",
         "recordercode": "",
         "recorderdesc": "",
+        "recordsystem": "NOVOGENE",
         "recordtime": "",
         "businesstype": "12",
         "status": "",
@@ -69,7 +70,11 @@ process_SIF_dict = {
         "corpdesc": "",
         "workflowid": "",
         "version": "",
-        "iscreatedatainfo": "0"
+        "iscreatedatainfo": "0",
+        "outsourcingstatus":"no",
+        "overseaflag":"",
+        "packpool_cond":"",
+        "pageflag":"zxmpcpage",
     }
 }
 

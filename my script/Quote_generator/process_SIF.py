@@ -215,6 +215,7 @@ class SIF(database):
                                                        data=post_sampleinfo)
 
 #test use
+#sys.path.extend(['C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script', 'C:/Users/Jerry/Documents/GitHub'])
 # path = 'C:/Users/jerry/onedrive-work/OneDrive - Novogene/Project/premade-hiseq/2020-05/Davis-US-CCHMC-1-premade-1-lane-WOBI-NVUS2020051818/NovoLibrarySIF-NVUS2020051818-filled.xlsx'
 # quote = 'NVUS2020051818'
 # test = SIF()
