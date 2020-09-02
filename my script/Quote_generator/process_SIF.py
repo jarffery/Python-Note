@@ -216,20 +216,20 @@ class SIF(database):
                                                        data=post_sampleinfo)
 
 #test use
-sys.path.extend(['C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator', 'C:/Users/Jerry/Documents/GitHub'])
-path_library = 'C:/Users/jerry/onedrive-work/OneDrive - Novogene/Project/premade-hiseq/2020-05/Davis-US-CCHMC-1-premade-1-lane-WOBI-NVUS2020051818/NovoLibrarySIF-NVUS2020051818-filled.xlsx'
-path_RNA = 'C:\\Users\\Jerry\\OneDrive - Novogene\\Project\\eukmrnaseq\\2020-07\\Davis-US-UCDM-3-human-EukmRNAeq-WOBI-NVUS2020073114\\hsENybexcel(1).xlsx'
-quote_library = 'NVUS2020051818'
-quote_RNA = 'NVUS2020073114'
-test = SIF()
-test.login()
-test.SIF_info_submit(quote_library)
-test_library = test.batchID_text
-test.SIF_info_submit(quote_RNA)
-test_RNA = test.batchID_text
-"""copy the library json post"""
-with open("SIF_json(CMS).py", mode='w', encoding='utf-8') as i:
-    i.write("process_SIF_dict_library = " + json.dumps(test_library) + "\n")
-    i.write("process_SIF_dict = " + json.dumps(test_RNA) + "\n")
+# sys.path.extend(['C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator', 'C:/Users/Jerry/Documents/GitHub'])
+# path_library = 'C:/Users/jerry/onedrive-work/OneDrive - Novogene/Project/premade-hiseq/2020-05/Davis-US-CCHMC-1-premade-1-lane-WOBI-NVUS2020051818/NovoLibrarySIF-NVUS2020051818-filled.xlsx'
+# path_RNA = 'C:\\Users\\Jerry\\OneDrive - Novogene\\Project\\eukmrnaseq\\2020-07\\Davis-US-UCDM-3-human-EukmRNAeq-WOBI-NVUS2020073114\\hsENybexcel(1).xlsx'
+# quote_library = 'NVUS2020051818'
+# quote_RNA = 'NVUS2020073114'
+# test = SIF()
+# test.login()
+# test.SIF_info_submit(quote_library)
+# test_library = test.batchID_text
+# test.SIF_info_submit(quote_RNA)
+# test_RNA = test.batchID_text
+# """copy the library json post"""
+# with open("SIF_json(CMS).py", mode='w', encoding='utf-8') as i:
+#     i.write("process_SIF_dict_library = " + json.dumps(test_library) + "\n")
+#     i.write("process_SIF_dict = " + json.dumps(test_RNA) + "\n")
 # test.file_submit('test', path)
 # test.sample_check()
