@@ -69,5 +69,5 @@ if __name__ == "__main__":
 
     #write to csv
     school_dataframe = pd.DataFrame.from_dict(search.school_dict, orient='index', dtype=None, columns=None)
-    school_dataframe.to_csv("./school_info.csv", encoding="utf_8_sig")
+    school_dataframe.to_csv("./school_info.csv", encoding="utf_8_sig", index_col = False)
 
