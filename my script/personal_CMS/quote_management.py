@@ -24,7 +24,7 @@ class Application(tk.Frame):
         self.create_widgets()
         self.quoteinfotext.focus()
         # bind shift-enter key to generate quotation
-        master.bind_all('<Shift-Return>', lambda e: self.get_quotation())
+        master.bind_all('<Shift-Return>', lambda e: self.contract_check())
 
     def paste_quote_text(self, event):
         """
