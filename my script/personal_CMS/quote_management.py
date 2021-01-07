@@ -9,6 +9,7 @@ happy every day!!
 import platform
 import tkinter.filedialog
 import tkinter as tk
+import re
 from Quotesection import start_folder
 from process_SIF import SIF
 from section import *

@@ -30,20 +30,32 @@ def start_folder(quote_info):
             shutil.move(quote_path, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
-                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
+                    'C:\\Users\\Jerry\\Downloads\\NovoLibrarySIF-.xlsx',
+                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[0] + '.xlsx')
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Downloads\\zjkENybexcel.xlsx', path + '\\' + 'zjkENybexcel.xlsx'
+                )
             else:
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
-                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
+                    'C:\\Users\\Jerry\\Downloads\\NovoNucleicAcidSIF-.xlsx',
+                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[0] + '.xlsx')
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Downloads\\hsENybexcel.xlsx', path + '\\' + 'hsENybexcel.xlsx'
+                )
         except FileExistsError:
             os.mkdir(path)
             shutil.move(quote_path, path + '\\' + f_name)
             if "premade" in q.quote_temp.lower():
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoLibrarySIF-.xlsx',
-                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[1] + '.xlsx')
+                    'C:\\Users\\Jerry\\Downloads\\NovoLibrarySIF-.xlsx',
+                    path + '\\' + 'NovoLibrarySIF-' + q.searchObj[0] + '.xlsx')
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Downloads\\zjkENybexcel.xlsx', path + '\\' + 'zjkENybexcel.xlsx'
+                )
             else:
                 shutil.copy(
-                    'C:\\Users\\Jerry\\Documents\\GitHub\\Note-Python\\my script\\Quote_generator\\NovoNucleicAcidSIF-.xlsx',
-                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[1] + '.xlsx')
+                    'C:\\Users\\Jerry\\Downloads\\NovoNucleicAcidSIF-.xlsx',
+                    path + '\\' + 'NovoNucleicAcidSIF-' + q.searchObj[0] + '.xlsx')
+                shutil.copy(
+                    'C:\\Users\\Jerry\\Downloads\\hsENybexcel.xlsx', path + '\\' + 'hsENybexcel.xlsx'
+                )
